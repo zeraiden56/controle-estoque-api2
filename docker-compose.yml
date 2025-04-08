@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  laravel-api:
+    build:
+      context: ./controle-backend
+    container_name: laravel-api
+    volumes:
+      - ./controle-backend:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - "9001:80"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: controle_estoque
+      POSTGRES_USER: estoque_user
+      POSTGRES_PASSWORD: Zeraiden205812!
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+volumes:
+  pgdata:
